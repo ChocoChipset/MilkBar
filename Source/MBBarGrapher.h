@@ -10,4 +10,8 @@
 
 @interface MBBarGrapher : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *allValues;
+
+-(id) initWithValues:(NSArray *)paramValues;
+
 @end
