@@ -14,7 +14,8 @@
 
 - (void)setUp
 {
-    self.exampleArray = @[@19, @21, @89, @69.9, @1, @0, @-23.3];
+    self.exampleArray = @[@19, @21, @89.577, @69.9, @1, @0, @-23.3];
+
     self.barGrapher = [[MBBarGrapher alloc] initWithValues:self.exampleArray];
     [super setUp];
     
@@ -30,22 +31,22 @@
 
 - (void)testMinValue
 {
-    STAssertEqualObjects(@-23.3, @(self.barGrapher.minValue), @"Minimum value calculation is incorrect");
+    STAssertEqualObjects(@-23.3, [self.barGrapher minValue], @"Minimum value calculation is incorrect");
 }
 
 - (void)testMaxValue
 {
-    STAssertEqualObjects(@69.9, @(self.barGrapher.maxValue), @"Maximum value calculation is incorrect");
+    STAssertEqualObjects(@89.577, [self.barGrapher maxValue], @"Maximum value calculation is incorrect");
 }
 
 - (void)testDynamicRange
 {
     CGFloat minValue = -23.3;
-    CGFloat maxValue = 69.9;
+    CGFloat maxValue = 89.577;
     
     CGFloat distanceBetweenValues = maxValue - minValue;
     
-    STAssertEqualObjects(@(ABS(distanceBetweenValues)), @(self.barGrapher.dynamicRange), @"Dynamic range calculation is incorrect");
+    STAssertEqualObjects(@(ABS(distanceBetweenValues)), @([self.barGrapher dynamicRange]), @"Dynamic range calculation is incorrect");
 }
 
 
