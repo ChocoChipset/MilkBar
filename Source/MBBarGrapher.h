@@ -16,4 +16,8 @@
 
 -(id) initWithValues:(NSArray *)paramValues;
 
+-(CGFloat) dynamicRange;
+-(NSNumber *) maxValue;
+-(NSNumber *) minValue;
+
 @end

@@ -46,4 +46,32 @@ const CGFloat kPercentageOfSpaceBetweenBarsByDefault = 0.2;
     return self;
 }
 
+#pragma mark - Basic Calculations
+
+-(NSNumber *)minValue
+{
+    NSNumber *minimum = [self.allValues valueForKeyPath:@"@min.doubleValue"];
+    
+    return minimum;
+}
+
+-(NSNumber *)maxValue
+{
+    NSNumber *maximum = [self.allValues valueForKeyPath:@"@max.doubleValue"];
+    
+    return maximum;
+}
+
+-(CGFloat)dynamicRange
+{
+    CGFloat minimumValue = [[self minValue] doubleValue];
+    
+    CGFloat maximumValue = [[self maxValue] doubleValue];
+    
+    CGFloat distanceBetweenValues = maximumValue - minimumValue;
+    
+    return distanceBetweenValues;
+}
+
+
 @end
