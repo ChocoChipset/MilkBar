@@ -8,6 +8,11 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
+@class MBBarGrapher;
+
 @interface ExampleTests : SenTestCase
+
+@property (nonatomic, strong) NSArray *exampleArray;
+@property (nonatomic, strong) MBBarGrapher *barGrapher;
 
 @end
