@@ -8,6 +8,15 @@
 
 #import "MBBarGrapher.h"
 
+#pragma mark - Class Constants
+
+/* * * * */
+
+const CGFloat kPercentageOfSpaceBetweenBarsByDefault = 0.2;
+
+/* * * * */
+
+
 @implementation MBBarGrapher
 
 #pragma mark - Class Initializers
@@ -31,6 +40,7 @@
         }
         
         _allValues = paramValues;
+        _percentageOfSpaceBetweenBars = kPercentageOfSpaceBetweenBarsByDefault;
     }
     
     return self;

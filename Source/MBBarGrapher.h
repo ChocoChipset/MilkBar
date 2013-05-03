@@ -11,6 +11,8 @@
 @interface MBBarGrapher : NSObject
 
 @property (nonatomic, strong, readonly) NSArray *allValues;
+@property (nonatomic, unsafe_unretained) CGFloat percentageOfSpaceBetweenBars;
+
 
 -(id) initWithValues:(NSArray *)paramValues;
 
