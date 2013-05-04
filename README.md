@@ -3,6 +3,13 @@ MilkBar
 
 iOS library to create simple bar charts.
 
+
+Scope
+-----
+
+* Currently the library handles positive real values.
+
+
 License
 -------
 

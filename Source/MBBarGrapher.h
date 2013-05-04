@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface MBBarGrapher : NSObject
+{
+    CGColorSpaceRef _colorSpaceDeviceRGB;
+}
 
 @property (nonatomic, unsafe_unretained) CGColorRef backgroundColorReference;
 @property (nonatomic, unsafe_unretained) CGColorRef fillColorReference;
