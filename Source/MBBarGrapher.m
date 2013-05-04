@@ -43,9 +43,24 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
         
         _allValues = paramValues;
         _percentageOfSpaceBetweenBars = kPercentageOfSpaceBetweenBarsByDefault;
+        
+        CGColorSpaceRef colorSpaceDeviceRGB = CGColorSpaceCreateDeviceRGB();
+        
+        _backgroundColorReference = CGColorCreate(colorSpaceDeviceRGB, kColorComponentsBackgroundByDefault);
+        _fillColorReference = CGColorCreate(colorSpaceDeviceRGB, kColorComponentsFillByDefault);
+        _strokeColorReference = CGColorCreate(colorSpaceDeviceRGB, kColorComponentsStrokeByDefault);
+        
+        CGColorSpaceRelease(colorSpaceDeviceRGB);
     }
     
     return self;
+}
+
+-(void)dealloc
+{
+    CGColorRelease(self.backgroundColorReference);
+    CGColorRelease(self.fillColorReference);
+    CGColorRelease(self.strokeColorReference);
 }
 
 #pragma mark - Basic Calculations
