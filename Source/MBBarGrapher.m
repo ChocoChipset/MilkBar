@@ -10,11 +10,13 @@
 
 #pragma mark - Class Constants
 
-/* * * * */
-
 const CGFloat kPercentageOfSpaceBetweenBarsByDefault = 0.2;
 
-/* * * * */
+const CGFloat kColorComponentsFillByDefault[4]          = { 0.0, 0.0, 0.0, 1.0 };
+const CGFloat kColorComponentsStrokeByDefault[4]        = { 1.0, 1.0, 1.0, 1.0 };
+const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 };
+
+#pragma mark -
 
 
 @implementation MBBarGrapher
