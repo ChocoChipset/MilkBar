@@ -19,6 +19,13 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 #pragma mark -
 
 
+@interface MBBarGrapher (CoreGraphicsAbstractionLayer)
+
+-(CGImageRef)generateImageReferenceForSize:(CGSize)paramSize;
+
+@end
+
+
 @implementation MBBarGrapher
 
 #pragma mark - Class Initializers
