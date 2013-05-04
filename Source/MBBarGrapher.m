@@ -10,7 +10,9 @@
 
 #pragma mark - Class Constants
 
-const CGFloat kPercentageOfSpaceBetweenBarsByDefault = 0.2;
+const CGFloat kPercentageOfSpaceBetweenBarsByDefault    = 0.2;
+
+const NSUInteger kBitsPerComponentForRGBColorSpace = 8;
 
 const CGFloat kColorComponentsFillByDefault[4]          = { 0.0, 0.0, 0.0, 1.0 };
 const CGFloat kColorComponentsStrokeByDefault[4]        = { 1.0, 1.0, 1.0, 1.0 };
@@ -21,7 +23,7 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 
 @interface MBBarGrapher (CoreGraphicsAbstractionLayer)
 
--(CGImageRef)generateImageReferenceForSize:(CGSize)paramSize;
+-(CGImageRef)createImageReferenceForSize:(CGSize)paramSize;
 
 @end
 
@@ -67,6 +69,63 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     CGColorRelease(self.backgroundColorReference);
     CGColorRelease(self.fillColorReference);
     CGColorRelease(self.strokeColorReference);
+}
+
+#pragma mark - Image Generation (iOS)
+
+-(UIImage *)generateImageForSize:(CGSize)paramSize
+{
+    CGImageRef imageReference = [self createImageReferenceForSize:paramSize];
+    
+    // TODO: adjust coordinate system!
+    
+    UIImage *result = [UIImage imageWithCGImage:imageReference];
+    
+    CGImageRelease(imageReference);
+    
+    return result;
+}
+
+#pragma mark - Image Generation (CoreGraphics)
+
+-(CGImageRef)createImageReferenceForSize:(CGSize)paramSize
+{
+    const CGFloat totalWidthBetweenBars = (paramSize.width - self.percentageOfSpaceBetweenBars);
+    const CGFloat singleBarWidth = (paramSize.width - totalWidthBetweenBars) / [self.allValues count];
+    const CGFloat singleSpaceWith = totalWidthBetweenBars / [self.allValues count];
+    
+    const CGFloat *backgroundColorComponents = CGColorGetComponents(self.backgroundColorReference);
+    
+    CGContextRef bitmapContext = CGBitmapContextCreate(NULL,
+                                                       paramSize.width,
+                                                       paramSize.height,
+                                                       kBitsPerComponentForRGBColorSpace,
+                                                       kBitsPerComponentForRGBColorSpace * paramSize.width,
+                                                       _colorSpaceDeviceRGB,
+                                                       kCGImageAlphaPremultipliedLast);
+    
+    
+    /* == Background == */
+    
+    CGContextSetRGBFillColor(bitmapContext,
+                             backgroundColorComponents[0],
+                             backgroundColorComponents[1],
+                             backgroundColorComponents[2],
+                             backgroundColorComponents[3]);
+    
+    CGContextFillRect(bitmapContext, CGRectMake(0.0, 0.0, paramSize.width, paramSize.height));
+    
+    
+    // TODO: Draw bars of chart
+    
+    
+    /* == Image Reference Export == */
+    
+    CGImageRef result = CGBitmapContextCreateImage(bitmapContext);
+    
+    CGContextRelease(bitmapContext);
+    
+    return result;
 }
 
 #pragma mark - Basic Calculations
