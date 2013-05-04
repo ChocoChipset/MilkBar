@@ -7,6 +7,7 @@
 //
 
 #import "MBViewController.h"
+#import "MBBarGrapher.h"
 
 @interface MBViewController ()
 
@@ -17,6 +18,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSArray *exampleValues = @[@23, @35.5, @20, @70.2, @45.5, @99.9];
+    
+    MBBarGrapher *barGrapher = [[MBBarGrapher alloc] initWithValues:exampleValues];
+    
+    // TODO: this size should correspond to self.graph.frame
+    CGSize testSize = { 300.0, 200.0 };
+    
+    self.graph.image = [barGrapher generateImageForSize:testSize];
+    
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

@@ -10,4 +10,6 @@
 
 @interface MBViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *graph;
+
 @end
