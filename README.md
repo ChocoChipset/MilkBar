@@ -5,6 +5,7 @@ iOS library to create simple bar charts.
 
 Given an array of NSNumber objects, the library will generate a UIImage object containing a simple graph representing them. The height of the tallest bar will correspond to the maximum value of the array.  
 
+![MilkBar Example](http://i.imgur.com/mlzqbI4.png)
 
 Current Limitations
 -------------------
