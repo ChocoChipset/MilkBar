@@ -21,12 +21,19 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 #pragma mark -
 
 
-@interface MBBarGrapher (CoreGraphicsAbstractionLayer)
+@interface MBBarGrapher ()
+
+@property (nonatomic, unsafe_unretained, readonly) CGColorSpaceRef colorSpaceDeviceRGB;
+
+@property (nonatomic, unsafe_unretained) CGColorRef backgroundColorReference;
+@property (nonatomic, unsafe_unretained) CGColorRef fillColorReference;
+@property (nonatomic, unsafe_unretained) CGColorRef strokeColorReference;
 
 -(CGImageRef)createImageReferenceForSize:(CGSize)paramSize;
 
 @end
 
+#pragma mark -
 
 @implementation MBBarGrapher
 
@@ -66,9 +73,9 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 -(void)dealloc
 {
     CGColorSpaceRelease(_colorSpaceDeviceRGB);
-    CGColorRelease(self.backgroundColorReference);
-    CGColorRelease(self.fillColorReference);
-    CGColorRelease(self.strokeColorReference);
+    CGColorRelease(_backgroundColorReference);
+    CGColorRelease(_fillColorReference);
+    CGColorRelease(_strokeColorReference);
 }
 
 #pragma mark - Image Generation (iOS)
@@ -99,7 +106,7 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
                                                        paramSize.height,
                                                        kBitsPerComponentForRGBColorSpace,
                                                        kBitsPerComponentForRGBColorSpace * paramSize.width,
-                                                       _colorSpaceDeviceRGB,
+                                                       self.colorSpaceDeviceRGB,
                                                        kCGImageAlphaPremultipliedLast);
     
     
@@ -138,6 +145,52 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     CGContextRelease(bitmapContext);
     
     return result;
+}
+
+#pragma mark - UIColor Accessors
+
+-(UIColor *)backgroundColor
+{
+    UIColor *result = [UIColor colorWithCGColor:self.backgroundColorReference];
+    
+    return result;
+}
+
+-(UIColor *)fillColor
+{
+    UIColor *result = [UIColor colorWithCGColor:self.fillColorReference];
+    
+    return result;
+}
+
+-(UIColor *)strokeColor
+{
+    UIColor *result = [UIColor colorWithCGColor:self.strokeColorReference];
+    
+    return result;
+}
+
+#pragma mark - UIColor Setters
+
+-(void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    CGColorRelease(self.backgroundColorReference);
+    
+    self.backgroundColorReference = CGColorCreateCopy(backgroundColor.CGColor);
+}
+
+-(void)setFillColor:(UIColor *)fillColor
+{
+    CGColorRelease(self.fillColorReference);
+    
+    self.fillColorReference = CGColorCreateCopy(fillColor.CGColor);
+}
+
+-(void)setStrokeColor:(UIColor *)strokeColor
+{
+    CGColorRelease(self.strokeColorReference);
+    
+    self.strokeColorReference = CGColorCreateCopy(strokeColor.CGColor);
 }
 
 #pragma mark - Basic Calculations

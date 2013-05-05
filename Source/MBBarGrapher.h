@@ -13,11 +13,15 @@ CGFloat NormalizeValue(CGFloat value, CGFloat maxValue, CGFloat chartHeight);
 @interface MBBarGrapher : NSObject
 {
     CGColorSpaceRef _colorSpaceDeviceRGB;
+    
+    CGColorRef _backgroundColorReference;
+    CGColorRef _fillColorReference;
+    CGColorRef _strokeColorReference;
 }
 
-@property (nonatomic, unsafe_unretained) CGColorRef backgroundColorReference;
-@property (nonatomic, unsafe_unretained) CGColorRef fillColorReference;
-@property (nonatomic, unsafe_unretained) CGColorRef strokeColorReference;
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) UIColor *fillColor;
+@property (nonatomic, strong) UIColor *strokeColor;
 
 @property (nonatomic, strong, readonly) NSArray *allValues;
 @property (nonatomic, unsafe_unretained) CGFloat percentageOfSpaceBetweenBars;
