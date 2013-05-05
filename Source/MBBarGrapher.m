@@ -37,7 +37,7 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     return [self initWithValues:nil];
 }
 
-/* Designated Initializer: */
+/* = Designated Initializer: = */
 
 -(id)initWithValues:(NSArray *)paramValues
 {
@@ -90,12 +90,10 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 
 -(CGImageRef)createImageReferenceForSize:(CGSize)paramSize
 {
-    const CGFloat totalWidthBetweenBars = (paramSize.width - self.percentageOfSpaceBetweenBars);
+    const CGFloat totalWidthBetweenBars = (paramSize.width * self.percentageOfSpaceBetweenBars);
     const CGFloat singleBarWidth = (paramSize.width - totalWidthBetweenBars) / [self.allValues count];
     const CGFloat singleSpaceWith = totalWidthBetweenBars / [self.allValues count];
-    
-    const CGFloat *backgroundColorComponents = CGColorGetComponents(self.backgroundColorReference);
-    
+
     CGContextRef bitmapContext = CGBitmapContextCreate(NULL,
                                                        paramSize.width,
                                                        paramSize.height,
@@ -107,16 +105,30 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     
     /* == Background == */
     
-    CGContextSetRGBFillColor(bitmapContext,
-                             backgroundColorComponents[0],
-                             backgroundColorComponents[1],
-                             backgroundColorComponents[2],
-                             backgroundColorComponents[3]);
+    CGContextSetFillColorWithColor(bitmapContext, self.backgroundColorReference);
     
     CGContextFillRect(bitmapContext, CGRectMake(0.0, 0.0, paramSize.width, paramSize.height));
     
+    /* == Bars == */
     
-    // TODO: Draw bars of chart
+    CGContextSetFillColorWithColor(bitmapContext, self.fillColorReference);
+    CGContextSetStrokeColorWithColor(bitmapContext, self.strokeColorReference);
+
+    CGFloat offsetX = 0.0;
+    CGFloat maxValue = [self.maxValue doubleValue]; // avoiding recalculation on each iteration
+    
+    for (NSUInteger barIndex = 0; barIndex < self.allValues.count; ++barIndex)
+    {
+        CGFloat barHeight = NormalizeValue([(NSNumber *)[self.allValues objectAtIndex:barIndex] doubleValue],
+                                           maxValue,
+                                           paramSize.height);
+        
+        CGRect barRect = CGRectMake(offsetX, 0.0, singleBarWidth, barHeight);
+        
+        CGContextFillRect(bitmapContext, CGRectIntegral(barRect));
+        
+        offsetX += singleBarWidth + singleSpaceWith;
+    }
     
     
     /* == Image Reference Export == */
