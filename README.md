@@ -3,11 +3,23 @@ MilkBar
 
 iOS library to create simple bar charts.
 
+Given an array of NSNumber objects, the library will generate a UIImage object containing a simple graph representing them. The height of the tallest bar will correspond to the maximum value of the array.  
 
-Scope
------
 
-* Currently the library handles positive real values.
+Current Limitations
+-------------------
+
+* Currently the library handles only positive real values.
+
+
+To-Dos
+------
+Please refer to the "Issues" section in Github.
+
+
+Contribution
+------------
+Of course! Fork this project and feel free to contribute your ideas, bug-fixes, re-factoring or suggestions through a pull-request.
 
 
 License
