@@ -39,6 +39,23 @@
     STAssertEqualObjects(@89.577, [self.barGrapher maxValue], @"Maximum value calculation is incorrect");
 }
 
+- (void)testNormalizeValue
+{
+    CGFloat maxValue = 89.577;
+    CGFloat midValue = 44.7885;
+    CGFloat chartHeight = 600.0;
+    CGFloat midValueHeight = 300.0;
+    
+    CGFloat normalizedValueMid = NormalizeValue(midValue, maxValue, chartHeight);
+    STAssertEqualsWithAccuracy(normalizedValueMid, midValueHeight, 0.00001, @"Value normalization of the mid value is incorrect");
+    
+    CGFloat normalizedValueMax = NormalizeValue(maxValue, maxValue, chartHeight);
+    STAssertEqualsWithAccuracy(normalizedValueMax, chartHeight, 0.00001, @"Value normalization of the maximum value is incorrect");
+    
+
+}
+
+
 - (void)testDynamicRange
 {
     CGFloat minValue = -23.3;
