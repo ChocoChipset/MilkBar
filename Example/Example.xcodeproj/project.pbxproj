@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A4823E517364941000817C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A67AC1A1733E85F009DE166 /* CoreGraphics.framework */; };
 		3A67AC171733E85F009DE166 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A67AC161733E85F009DE166 /* UIKit.framework */; };
 		3A67AC191733E85F009DE166 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A67AC181733E85F009DE166 /* Foundation.framework */; };
 		3A67AC1B1733E85F009DE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A67AC1A1733E85F009DE166 /* CoreGraphics.framework */; };
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4823E517364941000817C7 /* CoreGraphics.framework in Frameworks */,
 				3A67AC3E1733E860009DE166 /* SenTestingKit.framework in Frameworks */,
 				3A67AC3F1733E860009DE166 /* UIKit.framework in Frameworks */,
 				3A67AC401733E860009DE166 /* Foundation.framework in Frameworks */,
@@ -475,6 +477,7 @@
 				3A67AC501733E860009DE166 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A67AC511733E860009DE166 /* Build configuration list for PBXNativeTarget "ExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +486,7 @@
 				3A67AC531733E860009DE166 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
