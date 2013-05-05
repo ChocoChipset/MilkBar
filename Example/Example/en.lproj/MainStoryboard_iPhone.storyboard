@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -12,18 +12,19 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Xwa-Qt-zmq">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="162" id="z7c-b8-cwU"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="Xwa-Qt-zmq">
+                                <rect key="frame" x="20" y="64" width="280" height="464"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="WxS-JQ-6os">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="MilkBar" id="EEu-Ir-Sb1"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Xwa-Qt-zmq" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="4zo-Do-bWC"/>
-                            <constraint firstItem="Xwa-Qt-zmq" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="fiB-EI-5aq"/>
-                            <constraint firstItem="Xwa-Qt-zmq" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="mbX-7K-QDk"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="graph" destination="Xwa-Qt-zmq" id="ldu-99-w5F"/>
@@ -39,9 +40,6 @@
             <relationships>
                 <relationship kind="outlet" name="graph" candidateClass="UIImageView"/>
             </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
