@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+CGFloat NormalizeValue(CGFloat value, CGFloat maxValue, CGFloat chartHeight);
+
 @interface MBBarGrapher : NSObject
 {
     CGColorSpaceRef _colorSpaceDeviceRGB;

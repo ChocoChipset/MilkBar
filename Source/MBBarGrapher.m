@@ -155,5 +155,20 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     return distanceBetweenValues;
 }
 
+#pragma mark - Other Functions
+
+CGFloat NormalizeValue(CGFloat value, CGFloat maxValue, CGFloat chartHeight)
+{
+    if (maxValue == 0)
+    {
+        return NAN;
+    }
+    
+    CGFloat ratio = value / maxValue;
+    CGFloat resultHeight = chartHeight * ratio;
+    
+    return resultHeight;
+}
+
 
 @end
