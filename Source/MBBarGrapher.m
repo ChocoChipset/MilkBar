@@ -16,7 +16,7 @@ const NSUInteger kBitsPerComponentForRGBColorSpace = 8;
 
 const CGFloat kGradientLocationInBarByDefault[2] = { 0.0, 0.8 };
 
-const CGFloat kStrokeWidthByDefault = 1.0;
+const CGFloat kStrokeWidthByDefault = 2.0;
 
 const CGFloat kColorComponentsForGradientDarkness[4]    = { 0.0, 0.0, 0.0, 0.2 };
 const CGFloat kColorComponentsForGradientTransparency[4]= { 0.0, 0.0, 0.0, 0.0 };
@@ -143,13 +143,12 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 
         CGContextFillRect(bitmapContext, barRect);
         
-        CGContextSaveGState(bitmapContext);
+        CGContextSaveGState(bitmapContext); // used to clip gradient and outline to the actual bar's rectangle
         CGContextClipToRect(bitmapContext, barRect);
         CGPoint lowerBarPoint = CGPointMake(offsetX, barHeight);
         CGContextDrawLinearGradient(bitmapContext, shadowGradient, barRect.origin, lowerBarPoint, 0);
-        CGContextRestoreGState(bitmapContext);
-        
         CGContextStrokeRectWithWidth(bitmapContext, barRect, kStrokeWidthByDefault);
+        CGContextRestoreGState(bitmapContext);
 
         offsetX += singleBarWidth + singleSpaceWith;
     }
