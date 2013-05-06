@@ -10,7 +10,9 @@
 
 #pragma mark - Class Constants
 
+const CGFloat kPercentageOfSpaceBetweenBarsMaxValue     = 0.85;
 const CGFloat kPercentageOfSpaceBetweenBarsByDefault    = 0.2;
+const CGFloat kPercentageOfSpaceBetweenBarsMinValue     = 0.00;
 
 const NSUInteger kBitsPerComponentForRGBColorSpace = 8;
 
@@ -104,7 +106,8 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 
 -(CGImageRef)createImageReferenceForSize:(CGSize)paramSize
 {
-    const CGFloat totalWidthBetweenBars = (paramSize.width * self.percentageOfSpaceBetweenBars);
+    const CGFloat safePercentageValue = LimitValueToRange(self.percentageOfSpaceBetweenBars, kPercentageOfSpaceBetweenBarsMinValue, kPercentageOfSpaceBetweenBarsMaxValue);
+    const CGFloat totalWidthBetweenBars = (paramSize.width * safePercentageValue);
     const CGFloat singleBarWidth = (NSInteger)(paramSize.width - totalWidthBetweenBars) / [self.allValues count];
     const CGFloat singleSpaceWith = (NSInteger)totalWidthBetweenBars / ([self.allValues count] - 1);
 
@@ -274,6 +277,26 @@ CGFloat NormalizeValue(CGFloat value, CGFloat maxValue, CGFloat chartHeight)
     CGFloat resultHeight = chartHeight * ratio;
     
     return resultHeight;
+}
+
+CGFloat LimitValueToRange(CGFloat value, CGFloat minimum, CGFloat maximum)
+{
+    CGFloat result;
+    
+    if (value > maximum)
+    {
+        result = maximum;
+    }
+    else if (value< minimum)
+    {
+        result = minimum;
+    }
+    else
+    {
+        result = value;
+    }
+    
+    return result;
 }
 
 
