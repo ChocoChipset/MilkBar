@@ -24,7 +24,7 @@
     MBBarGrapher *barGrapher = [[MBBarGrapher alloc] initWithValues:exampleValues];
     
     CGFloat orangeColorComponents[4]    = { 1.0, 0.77, 0.29, 1.0 };
-    CGFloat blackColorComponents[4]     = { 0.0, 0.0, 0.0, 0.0 };
+    CGFloat blackColorComponents[4]     = { 0.0, 0.0, 0.0, 1.0 };
 
 
     barGrapher.fillColor = [UIColor colorWithRed:orangeColorComponents[0]
