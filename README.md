@@ -36,7 +36,7 @@ Usage
     self.imaginaryImageView.image = [barGrapher generateImageForSize:self.imaginaryImageView.bounds.size];
     ```
     
-5. Life happily everafter.
+5. Live happily ever after.
 
 
 Current Limitations
@@ -47,7 +47,7 @@ Current Limitations
 
 To-Dos
 ------
-Please refer to the "Issues" section in Github.
+Refer to the "Issues" section in Github.
 
 
 Contribution
