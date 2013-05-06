@@ -14,8 +14,10 @@ const CGFloat kPercentageOfSpaceBetweenBarsByDefault    = 0.2;
 
 const NSUInteger kBitsPerComponentForRGBColorSpace = 8;
 
-const CGFloat kColorComponentsFillByDefault[4]          = { 0.0, 0.0, 0.0, 1.0 };
-const CGFloat kColorComponentsStrokeByDefault[4]        = { 1.0, 1.0, 1.0, 1.0 };
+const CGFloat kStrokeWidthByDefault = 1.0;
+
+const CGFloat kColorComponentsFillByDefault[4]          = { 0.7, 0.7, 0.7, 1.0 };
+const CGFloat kColorComponentsStrokeByDefault[4]        = { 0.0, 0.0, 0.0, 1.0 };
 const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 };
 
 #pragma mark -
@@ -121,6 +123,8 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     CGContextSetFillColorWithColor(bitmapContext, self.fillColorReference);
     CGContextSetStrokeColorWithColor(bitmapContext, self.strokeColorReference);
 
+
+    
     CGFloat offsetX = 0.0;
     CGFloat maxValue = [self.maxValue doubleValue]; // avoiding recalculation on each iteration
     
@@ -130,9 +134,10 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
                                            maxValue,
                                            paramSize.height);
         
-        CGRect barRect = CGRectMake(offsetX, 0.0, singleBarWidth, barHeight);
+        CGRect barRect = CGRectIntegral(CGRectMake(offsetX, 0.0, singleBarWidth, barHeight));
         
-        CGContextFillRect(bitmapContext, CGRectIntegral(barRect));
+        CGContextFillRect(bitmapContext, barRect);
+        CGContextStrokeRectWithWidth(bitmapContext, barRect, kStrokeWidthByDefault);
         
         offsetX += singleBarWidth + singleSpaceWith;
     }
