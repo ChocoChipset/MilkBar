@@ -61,7 +61,7 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     
     if (self)
     {
-        if (!paramValues)
+        if (![paramValues count])
         {
             return nil;
         }
