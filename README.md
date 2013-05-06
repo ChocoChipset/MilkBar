@@ -7,6 +7,37 @@ Given an array of NSNumber objects, the library will generate a UIImage object c
 
 ![MilkBar Example](http://i.imgur.com/ZoMmGup.png)
 
+Usage
+----
+
+1. Import the files located in the folder *Source/* to your project.
+
+2. Initialize an instance of *MBBarGrapher* with a non-empty NSArray containing only instances of NSNumbers.
+
+```objective-c
+NSArray *exampleValues = @[@23, @35.5, @20, @70.2, @45.5, @47.7, @13.2, @33.3, @69.999, @83.25, @90.2, @99.9, @120.0];
+        
+MBBarGrapher *barGrapher = [[MBBarGrapher alloc] initWithValues:exampleValues];
+```
+
+3. Adjust the background, outline and fill colors and the space between bars
+
+```objective-c
+barGrapher.percentageOfSpaceBetweenBars = 0.2;
+        
+barGrapher.fillColor = [UIColor orangeColor];
+barGrapher.strokeColor = [UIColor blackColor];
+barGrapher.backgroundColor = [UIColor clearColor];
+```
+
+4. Generate a UIImage to display on screen, send through the Internetz or whatever.
+
+```objective-c
+self.imaginaryImageView.image = [barGrapher generateImageForSize:self.imaginaryImageView.bounds.size];
+```
+5. Life happily everafter.
+
+
 Current Limitations
 -------------------
 
