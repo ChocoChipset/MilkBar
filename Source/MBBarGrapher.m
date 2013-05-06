@@ -14,7 +14,12 @@ const CGFloat kPercentageOfSpaceBetweenBarsByDefault    = 0.2;
 
 const NSUInteger kBitsPerComponentForRGBColorSpace = 8;
 
+const CGFloat kGradientLocationInBarByDefault[2] = { 0.0, 0.8 };
+
 const CGFloat kStrokeWidthByDefault = 1.0;
+
+const CGFloat kColorComponentsForGradientDarkness[4]    = { 0.0, 0.0, 0.0, 0.2 };
+const CGFloat kColorComponentsForGradientTransparency[4]= { 0.0, 0.0, 0.0, 0.0 };
 
 const CGFloat kColorComponentsFillByDefault[4]          = { 0.7, 0.7, 0.7, 1.0 };
 const CGFloat kColorComponentsStrokeByDefault[4]        = { 0.0, 0.0, 0.0, 1.0 };
@@ -119,14 +124,14 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
     CGContextFillRect(bitmapContext, CGRectMake(0.0, 0.0, paramSize.width, paramSize.height));
     
     /* == Bars == */
+
+    CGGradientRef shadowGradient = CreateShadowGradientWithColorsSpace(&_colorSpaceDeviceRGB);
     
     CGContextSetFillColorWithColor(bitmapContext, self.fillColorReference);
     CGContextSetStrokeColorWithColor(bitmapContext, self.strokeColorReference);
-
-
     
+    const CGFloat maxValue = [self.maxValue doubleValue]; // avoiding recalculation on each iteration
     CGFloat offsetX = 0.0;
-    CGFloat maxValue = [self.maxValue doubleValue]; // avoiding recalculation on each iteration
     
     for (NSUInteger barIndex = 0; barIndex < self.allValues.count; ++barIndex)
     {
@@ -135,12 +140,21 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
                                            paramSize.height);
         
         CGRect barRect = CGRectIntegral(CGRectMake(offsetX, 0.0, singleBarWidth, barHeight));
-        
+
         CGContextFillRect(bitmapContext, barRect);
-        CGContextStrokeRectWithWidth(bitmapContext, barRect, kStrokeWidthByDefault);
         
+        CGContextSaveGState(bitmapContext);
+        CGContextClipToRect(bitmapContext, barRect);
+        CGPoint lowerBarPoint = CGPointMake(offsetX, barHeight);
+        CGContextDrawLinearGradient(bitmapContext, shadowGradient, barRect.origin, lowerBarPoint, 0);
+        CGContextRestoreGState(bitmapContext);
+        
+        CGContextStrokeRectWithWidth(bitmapContext, barRect, kStrokeWidthByDefault);
+
         offsetX += singleBarWidth + singleSpaceWith;
     }
+    
+    CGGradientRelease(shadowGradient);
     
     
     /* == Image Reference Export == */
@@ -226,6 +240,29 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 }
 
 #pragma mark - Other Functions
+
+CGGradientRef CreateShadowGradientWithColorsSpace(CGColorSpaceRef *paramColorSpace)
+{
+    if (!paramColorSpace)
+    {
+        return NULL;
+    }
+    
+    CGColorRef gradientColorReferences[2];
+    gradientColorReferences[0] = CGColorCreate(*paramColorSpace, kColorComponentsForGradientTransparency);
+    gradientColorReferences[1] = CGColorCreate(*paramColorSpace, kColorComponentsForGradientDarkness);
+    
+    CFArrayRef gradientColorsArray = CFArrayCreate(NULL, (void *)gradientColorReferences, 2, &kCFTypeArrayCallBacks);
+    
+    CGColorRelease(gradientColorReferences[0]);
+    CGColorRelease(gradientColorReferences[1]);
+    
+    CGGradientRef glossGradient = CGGradientCreateWithColors(*paramColorSpace, gradientColorsArray, kGradientLocationInBarByDefault);
+    
+    CFRelease(gradientColorsArray);
+    
+    return glossGradient;
+}
 
 CGFloat NormalizeValue(CGFloat value, CGFloat maxValue, CGFloat chartHeight)
 {
