@@ -105,8 +105,8 @@ const CGFloat kColorComponentsBackgroundByDefault[4]    = { 0.0, 0.0, 0.0, 0.0 }
 -(CGImageRef)createImageReferenceForSize:(CGSize)paramSize
 {
     const CGFloat totalWidthBetweenBars = (paramSize.width * self.percentageOfSpaceBetweenBars);
-    const CGFloat singleBarWidth = (paramSize.width - totalWidthBetweenBars) / [self.allValues count];
-    const CGFloat singleSpaceWith = totalWidthBetweenBars / ([self.allValues count] - 1);
+    const CGFloat singleBarWidth = (NSInteger)(paramSize.width - totalWidthBetweenBars) / [self.allValues count];
+    const CGFloat singleSpaceWith = (NSInteger)totalWidthBetweenBars / ([self.allValues count] - 1);
 
     CGContextRef bitmapContext = CGBitmapContextCreate(NULL,
                                                        paramSize.width,
