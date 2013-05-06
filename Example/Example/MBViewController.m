@@ -26,6 +26,7 @@
     CGFloat orangeColorComponents[4]    = { 1.0, 0.77, 0.29, 1.0 };
     CGFloat blackColorComponents[4]     = { 0.0, 0.0, 0.0, 0.0 };
 
+
     barGrapher.fillColor = [UIColor colorWithRed:orangeColorComponents[0]
                                            green:orangeColorComponents[1]
                                             blue:orangeColorComponents[2]
@@ -36,6 +37,7 @@
                                               blue:blackColorComponents[2]
                                              alpha:blackColorComponents[3]];
     
+
     self.graph.image = [barGrapher generateImageForSize:self.graph.frame.size];
 }
 
