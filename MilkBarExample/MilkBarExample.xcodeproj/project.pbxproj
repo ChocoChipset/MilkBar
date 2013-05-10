@@ -468,6 +468,7 @@
 				3A67AC061733E838009DE166 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A67AC071733E838009DE166 /* Build configuration list for PBXNativeTarget "MilkBarExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +477,7 @@
 				3A67AC091733E838009DE166 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
