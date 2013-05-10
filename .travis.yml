@@ -1,5 +1,5 @@
 script: osx-cibuild.sh 
 language: objective-c
 before_script: 
-  - cp -R BuilScript/ MilkBarExample/
+  - cp -R BuildScript/ MilkBarExample/
   - cd MilkBarExample
