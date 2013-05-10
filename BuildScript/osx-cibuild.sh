@@ -65,7 +65,7 @@ run_xcodebuild ()
     then
         xcodebuild -workspace "$XCWORKSPACE" -scheme "$scheme" -configuration "$XCCONFIGURATION" build OBJROOT="$PWD/build" SYMROOT="$PWD/build" $XCODEBUILD_SETTINGS
     else
-        xcodebuild -scheme "$scheme" -configuration "$XCCONFIGURATION" build OBJROOT="$PWD/build" SYMROOT="$PWD/build" $XCODEBUILD_SETTINGS
+        xcodebuild -sdk iphonesimulator -scheme "$scheme" -configuration "$XCCONFIGURATION" build OBJROOT="$PWD/build" SYMROOT="$PWD/build" $XCODEBUILD_SETTINGS
     fi
 
     local status=$?
