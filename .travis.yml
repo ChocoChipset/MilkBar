@@ -1,1 +1,2 @@
- language: objective-c
+language: objective-c
+before_script: cd MilkBarExample
