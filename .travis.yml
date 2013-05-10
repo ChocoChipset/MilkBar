@@ -1,3 +1,5 @@
-script: ../BuildScript/osx-cibuild.sh 
+script: osx-cibuild.sh 
 language: objective-c
-before_script: cd MilkBarExample
+before_script: 
+  - cp BuilScript/ MilkBarExample/
+  - cd MilkBarExample
