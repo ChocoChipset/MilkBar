@@ -1,2 +1,3 @@
+script: BuildScript/osx-cibuild.sh 
 language: objective-c
 before_script: cd MilkBarExample
